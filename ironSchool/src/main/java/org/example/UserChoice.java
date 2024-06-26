@@ -20,7 +20,14 @@ public class UserChoice {
     }
 
     public static void schoolName(){
-        String school = scanner.nextLine();
+        while(true) {
+            String school = scanner.nextLine();
+            if(!containsProfanity(school) && !containsNumbers(school)) {
+                return;
+            }
+            System.out.println("Not allowed to use numbers or profanity");
+            schoolName();
+        }
     }
 
 
