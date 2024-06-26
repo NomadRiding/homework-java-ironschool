@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 
 public class UserChoice {
     private static Scanner scanner = new Scanner(System.in);
+    public static double totalCourseCost = 0.0;
+    private static List<Course> courses = new ArrayList<>();
+
     public static void main(String[] args) {
         welcome();
     }
@@ -61,7 +64,7 @@ public class UserChoice {
     private static void collectTeacherNames(int teacherQuantity) {
         String[] teacherNames = new String[teacherQuantity];
 
-        for (int i = 0; i < teacherQuantity; ++i) {
+        for (int i = 0; i < teacherQuantity; i++) {
             teacherNames[i] = getFilteredName("teacher", i);
         }
 
@@ -91,17 +94,19 @@ public class UserChoice {
         collectCourseNames(courseQuantity);
     }
 
+
     private static void collectCourseNames(int courseQuantity) {
-        String[] courseNames = new String[courseQuantity];
-
-        for (int i = 0; i < courseQuantity; ++i) {
-            courseNames[i] = getFilteredName("course", i);
+        for (int i = 0; i < courseQuantity; i++){
+            String name = getFilteredName("Course", i);
+            Course course = new Course(name, 1000);
+            courses.add(course);
+            totalCourseCost += course.getPrice();
         }
-
-        System.out.println("Course names:");
-        for (String name : courseNames) {
-            System.out.println(name);
+        System.out.println("Course names and prices: ");
+        for(Course course : courses) {
+            System.out.println(course.getName() + " : $" + course.getPrice());
         }
+        System.out.println("Total course cost: $" + totalCourseCost);
     }
 
     public static void commandMenu() {
@@ -164,7 +169,7 @@ public class UserChoice {
         }
     }
 
-    
+
 
     public static Boolean containsProfanity(String input){
         List<String> profanities = Arrays.asList("fuck", "bitch", "asshole", "cunt");
