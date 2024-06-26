@@ -16,7 +16,7 @@ public class Course {
     }
 
     private static synchronized String generateCourseId() {
-        return "COURSE-" + (++courseCounter);
+        return "COURSE-" + (courseCounter++);
     }
 
     public String getName() {

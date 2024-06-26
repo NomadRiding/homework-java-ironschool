@@ -115,6 +115,7 @@ public class UserChoice {
 
     public static void commandMenu() {
         while (true) {
+            System.out.println("\n");
             System.out.println("Please select from the following options:");
             System.out.println("1. ENROLL");
             System.out.println("2. ASSIGN");
@@ -186,6 +187,8 @@ public class UserChoice {
             System.out.println(teacher.getName());
         }
     }
+
+
 
     public static void showProfit(){
         totalProfit = totalStudentEnrollment - (totalCourseCost - totalTeacherSalary);
