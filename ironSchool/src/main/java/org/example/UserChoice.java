@@ -164,6 +164,8 @@ public class UserChoice {
         }
     }
 
+    
+
     public static Boolean containsProfanity(String input){
         List<String> profanities = Arrays.asList("fuck", "bitch", "asshole", "cunt");
         for (String profanity : profanities) {

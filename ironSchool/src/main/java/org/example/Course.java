@@ -1,6 +1,7 @@
 package org.example;
 
 public class Course {
+    private static int courseCounter = 0;
     private String courseId;
     private String name;
     private double price;
@@ -8,9 +9,14 @@ public class Course {
     private Teacher teacher;
 
     public Course(String name, double price) {
+        this.courseId = generateCourseId();
         this.name = name;
         this.price = price;
         this.money_earned = 0.0;
+    }
+
+    private static synchronized String generateCourseId() {
+        return "COURSE-" + (++courseCounter);
     }
 
     public String getName() {
