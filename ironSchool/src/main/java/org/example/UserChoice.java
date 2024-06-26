@@ -104,8 +104,65 @@ public class UserChoice {
         }
     }
 
+    public static void commandMenu() {
+        while (true) {
+            System.out.println("Please select from the following options:");
+            System.out.println("1. ENROLL");
+            System.out.println("2. ASSIGN");
+            System.out.println("3. SHOW COURSES");
+            System.out.println("4. LOOKUP COURSE");
+            System.out.println("5. SHOW STUDENTS");
+            System.out.println("6. LOOKUP STUDENT");
+            System.out.println("7. SHOW TEACHERS");
+            System.out.println("8. LOOKUP TEACHER");
+            System.out.println("9. SHOW PROFIT");
+            System.out.println("0. EXIT");
+            System.out.println("SELECT THE NUMBER:");
 
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine();  // Clear the buffer
 
+                switch (choice) {
+                    case 1:
+                        // Enroll logic here
+                        break;
+                    case 2:
+                        // Assign logic here
+                        break;
+                    case 3:
+                        // Show courses logic here
+                        break;
+                    case 4:
+                        // Lookup course logic here
+                        break;
+                    case 5:
+                        // Show students logic here
+                        break;
+                    case 6:
+                        // Lookup student logic here
+                        break;
+                    case 7:
+                        // Show teachers logic here
+                        break;
+                    case 8:
+                        // Lookup teacher logic here
+                        break;
+                    case 9:
+                        // Show profit logic here
+                        break;
+                    case 0:
+                        System.out.println("Exiting...");
+                        return;
+                    default:
+                        System.out.println("Invalid choice, please try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Uh oh, please enter a valid number.");
+                scanner.next(); // Clear invalid input
+            }
+        }
+    }
 
     public static Boolean containsProfanity(String input){
         List<String> profanities = Arrays.asList("fuck", "bitch", "asshole", "cunt");
