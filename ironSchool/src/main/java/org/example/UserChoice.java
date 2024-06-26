@@ -14,7 +14,7 @@ public class UserChoice {
     }
 
     public static void schoolName(){
-
+        String school = scanner.nextLine();
     }
 
 
