@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserChoice {
     private static Scanner scanner;
@@ -39,4 +41,9 @@ public class UserChoice {
         return true;
     }
 
+    public static Boolean containsNumbers(String input){
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.find();
+    }
 }
