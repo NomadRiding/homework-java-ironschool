@@ -44,6 +44,7 @@ public class UserChoice {
             }
         }
         collectTeacherNames(teacherQuantity);
+        courseQuantity();
     }
 
     private static String getFilteredName(String type, int i) {
@@ -70,6 +71,38 @@ public class UserChoice {
         }
     }
 
+    private static void courseQuantity() {
+        System.out.println("How many courses should this school have?");
+        int courseQuantity;
+
+        while (true) {
+            try {
+                courseQuantity = scanner.nextInt();
+                scanner.nextLine();
+                if (courseQuantity > 0) {
+                    break;
+                }
+                System.out.println("Enter a number above ZERO");
+            } catch (InputMismatchException e) {
+                System.out.println("Uh oh, please enter a number. Try again");
+                scanner.next();  // Clear invalid input
+            }
+        }
+        collectCourseNames(courseQuantity);
+    }
+
+    private static void collectCourseNames(int courseQuantity) {
+        String[] courseNames = new String[courseQuantity];
+
+        for (int i = 0; i < courseQuantity; ++i) {
+            courseNames[i] = getFilteredName("course", i);
+        }
+
+        System.out.println("Course names:");
+        for (String name : courseNames) {
+            System.out.println(name);
+        }
+    }
 
 
     public static Boolean containsProfanity(String input){
