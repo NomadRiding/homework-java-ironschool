@@ -8,6 +8,7 @@ public class UserChoice {
     private static Scanner scanner = new Scanner(System.in);
     public static double totalCourseCost = 0.0;
     private static List<Course> courses = new ArrayList<>();
+    private static List<String> teacherNames = new ArrayList<>();
 
     public static void main(String[] args) {
         welcome();
@@ -26,7 +27,6 @@ public class UserChoice {
                 return;
             }
             System.out.println("Not allowed to use numbers or profanity");
-            schoolName();
         }
     }
 
@@ -62,10 +62,8 @@ public class UserChoice {
     }
 
     private static void collectTeacherNames(int teacherQuantity) {
-        String[] teacherNames = new String[teacherQuantity];
-
         for (int i = 0; i < teacherQuantity; i++) {
-            teacherNames[i] = getFilteredName("teacher", i);
+            teacherNames.add(getFilteredName("teacher", i));
         }
 
         System.out.println("Teacher names:");
@@ -107,6 +105,7 @@ public class UserChoice {
             System.out.println(course.getName() + " : $" + course.getPrice());
         }
         System.out.println("Total course cost: $" + totalCourseCost);
+        commandMenu();
     }
 
     public static void commandMenu() {
@@ -136,7 +135,7 @@ public class UserChoice {
                         // Assign logic here
                         break;
                     case 3:
-                        // Show courses logic here
+                        showCourses();
                         break;
                     case 4:
                         // Lookup course logic here
@@ -148,7 +147,7 @@ public class UserChoice {
                         // Lookup student logic here
                         break;
                     case 7:
-                        // Show teachers logic here
+                        showTeacherNames();
                         break;
                     case 8:
                         // Lookup teacher logic here
@@ -169,6 +168,19 @@ public class UserChoice {
         }
     }
 
+    public static void showCourses(){
+        System.out.println("Courses: ");
+        for(Course course : courses){
+            System.out.println(course.getName());
+        }
+    }
+
+    public static void showTeacherNames(){
+        System.out.println("Teachers: ");
+        for(String teacher : teacherNames){
+            System.out.println(teacher);
+        }
+    }
 
 
     public static Boolean containsProfanity(String input){
