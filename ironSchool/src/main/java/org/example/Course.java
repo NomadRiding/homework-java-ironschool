@@ -11,7 +11,7 @@ public class Course {
     public Course(String name, double price) {
         this.courseId = generateCourseId();
         this.name = name;
-        this.price = 1000;
+        this.price = 1500;
         this.money_earned = 0.0;
     }
 

@@ -7,8 +7,10 @@ import java.util.regex.Pattern;
 public class UserChoice {
     private static Scanner scanner = new Scanner(System.in);
     public static double totalCourseCost = 0.0;
+    public static double totalTeacherSalary = 0.0;
+    public static double totalProfit = 0.0;
     private static List<Course> courses = new ArrayList<>();
-    private static List<String> teacherNames = new ArrayList<>();
+    private static List<Teacher> teachers = new ArrayList<>();
 
     public static void main(String[] args) {
         welcome();
@@ -63,12 +65,14 @@ public class UserChoice {
 
     private static void collectTeacherNames(int teacherQuantity) {
         for (int i = 0; i < teacherQuantity; i++) {
-            teacherNames.add(getFilteredName("teacher", i));
+            String name = getFilteredName("teacher", i);
+            Teacher teacher = new Teacher(name, 700);
+            totalTeacherSalary += teacher.getSalary();
         }
 
         System.out.println("Teacher names:");
-        for (String name : teacherNames) {
-            System.out.println(name);
+        for (Teacher teacher : teachers) {
+            System.out.println(teacher.getName());
         }
     }
 
@@ -177,9 +181,14 @@ public class UserChoice {
 
     public static void showTeacherNames(){
         System.out.println("Teachers: ");
-        for(String teacher : teacherNames){
-            System.out.println(teacher);
+        for(Teacher teacher : teachers){
+            System.out.println(teacher.getName());
         }
+    }
+
+    public static void showProfit(){
+        totalProfit = totalCourseCost - totalTeacherSalary;
+        System.out.println();
     }
 
 
