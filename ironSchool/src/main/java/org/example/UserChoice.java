@@ -9,6 +9,7 @@ public class UserChoice {
     public static double totalCourseCost = 0.0;
     public static double totalTeacherSalary = 0.0;
     public static double totalProfit = 0.0;
+    public static double totalStudentEnrollment = 0.0;
     private static List<Course> courses = new ArrayList<>();
     private static List<Teacher> teachers = new ArrayList<>();
 
@@ -157,7 +158,7 @@ public class UserChoice {
                         // Lookup teacher logic here
                         break;
                     case 9:
-                        // Show profit logic here
+                        showProfit();
                         break;
                     case 0:
                         System.out.println("Exiting...");
@@ -187,8 +188,8 @@ public class UserChoice {
     }
 
     public static void showProfit(){
-        totalProfit = totalCourseCost - totalTeacherSalary;
-        System.out.println();
+        totalProfit = totalStudentEnrollment - (totalCourseCost - totalTeacherSalary);
+        System.out.println(totalProfit);
     }
 
 
