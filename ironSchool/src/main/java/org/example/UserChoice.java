@@ -105,20 +105,16 @@ public class UserChoice {
     }
 
 
+
+
     public static Boolean containsProfanity(String input){
-        List<String> profanities = Arrays.asList("fuck", "bitch", "asshole", "cunt", "whore");
-        Iterator var2 = profanities.iterator();
-
-        String profanity;
-        do {
-            if (!var2.hasNext()) {
-                return false;
+        List<String> profanities = Arrays.asList("fuck", "bitch", "asshole", "cunt");
+        for (String profanity : profanities) {
+            if (input.toLowerCase().contains(profanity)) {
+                return true;
             }
-
-            profanity = (String)var2.next();
-        } while(!input.toLowerCase().contains(profanity));
-
-        return true;
+        }
+        return false;
     }
 
     public static Boolean containsNumbers(String input){
