@@ -14,6 +14,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserChoiceTest {
+    @Before
+    public void setUp() {
+        // Initialize the courses list
+        UserChoice.courses = new ArrayList<>();
+        UserChoice.courses.add(new Course("Math101", 2000));
+        UserChoice.courses.add(new Course("Science102", 2000));
+        UserChoice.courses.add(new Course("History103", 2000));
+
+        // Initialize the students list
+        UserChoice.students = new ArrayList<>();
+        UserChoice.students.add(new Student("Alice","123 Main St", "alice@example.com"));
+        UserChoice.students.add(new Student("Bob","456 Maple Ave", "bob@example.com"));
+        UserChoice.students.add(new Student("Charlie","789 Oak Dr", "charlie@example.com"));
+
+        // Initialize the teachers list
+        UserChoice.teachers = new ArrayList<>();
+        UserChoice.teachers.add(new Teacher("Mr. Smith", 700));
+        UserChoice.teachers.add(new Teacher("Ms. Johnson", 800));
+        UserChoice.teachers.add(new Teacher("Dr. Brown", 900));
+    }
+
     @Test
     public void testContainsProfanity() {
         assertTrue(UserChoice.containsProfanity("This is a fucking test"));
@@ -44,25 +65,16 @@ public class UserChoiceTest {
         UserChoice.showProfit();
 
         String actualOutput = outContent.toString().trim();
-
         System.setOut(System.out);
 
         assertEquals(String.valueOf(expectedProfit), actualOutput);
-    }
-
-    @Before
-    public void setUp() {
-        UserChoice.courses = new ArrayList<>();
-        UserChoice.courses.add(new Course("Math101", 0));
-        UserChoice.courses.add(new Course("Science102", 0));
-        UserChoice.courses.add(new Course("History103", 0));
     }
 
     @Test
     public void testFindCourseById_CourseExists() {
         Course course = UserChoice.findCourseById("Course1");
         assertNotNull(course);
-        assertEquals("Math101", ((Course) course).getName());
+        assertEquals("Math101", course.getName());
     }
 
     @Test
@@ -74,8 +86,7 @@ public class UserChoiceTest {
     @Test
     public void testLookupCourse_CourseDoesNotExist() {
         String input = "NonExistentCourse\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -83,25 +94,12 @@ public class UserChoiceTest {
         UserChoice.lookupCourse();
 
         String expectedOutput = "Course with ID NonExistentCourse not found.";
-        String actualOutput = outContent.toString().trim();  // Trim to remove any extra newline
+        String actualOutput = outContent.toString().trim();
 
         System.setIn(System.in);
         System.setOut(System.out);
 
         assertEquals(expectedOutput, actualOutput);
-    }
-
-    @Before
-    public void setUpStudent() {
-        UserChoice.students = new ArrayList<>();
-        UserChoice.students.add(new Student("Alice", "123 Main St", "alice@example.com"));
-        UserChoice.students.add(new Student("Bob",  "456 Maple Ave", "bob@example.com"));
-        UserChoice.students.add(new Student("Charlie", "789 Oak Dr", "charlie@example.com"));
-
-        UserChoice.teachers = new ArrayList<>();
-        UserChoice.teachers.add(new Teacher("Mr. Smith", 700));
-        UserChoice.teachers.add(new Teacher("Ms. Johnson", 800));
-        UserChoice.teachers.add(new Teacher("Dr. Brown", 900));
     }
 
     @Test
@@ -117,19 +115,10 @@ public class UserChoiceTest {
         assertNull(student);
     }
 
-    @Before
-    public void setUpStudentLookUp() {
-        UserChoice.students = new ArrayList<>();
-        UserChoice.students.add(new Student("Alice", "123 Main St", "alice@example.com"));
-        UserChoice.students.add(new Student("Bob", "456 Maple Ave", "bob@example.com"));
-        UserChoice.students.add(new Student("Charlie","789 Oak Dr", "charlie@example.com"));
-    }
-
     @Test
     public void testLookupStudent_StudentExists() {
         String input = "1\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -138,6 +127,7 @@ public class UserChoiceTest {
 
         String expectedOutput = "Student Name: Alice";
         String actualOutput = outContent.toString().trim();
+
         System.setIn(System.in);
         System.setOut(System.out);
 
@@ -147,8 +137,7 @@ public class UserChoiceTest {
     @Test
     public void testLookupStudent_StudentDoesNotExist() {
         String input = "4\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -157,18 +146,11 @@ public class UserChoiceTest {
 
         String expectedOutput = "Student with ID 4 not found.";
         String actualOutput = outContent.toString().trim();
+
         System.setIn(System.in);
         System.setOut(System.out);
 
         assertEquals(expectedOutput, actualOutput);
-    }
-
-    @Before
-    public void setUpShowStudent() {
-        UserChoice.students = new ArrayList<>();
-        UserChoice.students.add(new Student("Alice",  "123 Main St", "alice@example.com"));
-        UserChoice.students.add(new Student("Bob",  "456 Maple Ave", "bob@example.com"));
-        UserChoice.students.add(new Student("Charlie",  "789 Oak Dr", "charlie@example.com"));
     }
 
     @Test
@@ -180,6 +162,7 @@ public class UserChoiceTest {
 
         String expectedOutput = "Students: \nAlice\nBob\nCharlie";
         String actualOutput = outContent.toString().trim();
+
         System.setOut(System.out);
 
         assertEquals(expectedOutput, actualOutput);
@@ -194,8 +177,9 @@ public class UserChoiceTest {
 
         String expectedOutput = "Teachers: \nMr. Smith\nMs. Johnson\nDr. Brown";
         String actualOutput = outContent.toString().trim();
+
         System.setOut(System.out);
+
         assertEquals(expectedOutput, actualOutput);
     }
-
 }
