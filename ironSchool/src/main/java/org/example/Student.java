@@ -7,18 +7,21 @@ public class Student {
     private String name;
     private String address;
     private String email;
-    private Course course;
+   // private Course course;
 
-    // Default constructor
-    public Student() {
-        this.studentId = generateStudentId();
-    }
+
 
     // Parameterized constructor
-    public Student(String name, String address, String email) {
+    public Student(String studentId, String name, String address, String email) {
+        this.studentId = generateStudentId();
         this.name = name;
         this.address = address;
         this.email = email;
+    }
+
+    public String generateStudentId() {
+        return UUID.randomUUID().toString();
+
     }
 
     // Getter for studentId
@@ -54,14 +57,14 @@ public class Student {
     }
 
     // Getter and Setter for course
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+    //public Course getCourse() {
+      //  return course;
+//    }
+//
+//    public void setCourse(Course course) {
+//        this.course = course;
+//    }
 
 
 }
-}
+
