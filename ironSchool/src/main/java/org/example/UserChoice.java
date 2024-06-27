@@ -179,7 +179,7 @@ public class UserChoice {
                         enrollStudent();
                         break;
                     case 2:
-//                        assignTeacher();
+                        assignTeacher();
                         break;
                     case 3:
                         showCourses();
@@ -236,26 +236,26 @@ public class UserChoice {
         System.out.println("Student: " + student.getName() + " has been enrolled into " +course.getName() + ".");
     }
 
-//    public static void assignTeacher() {
-//        System.out.println("Enter a Teacher Id to assign: ");
-//        String teacherId = scanner.nextLine();
-//        Teacher teacher = findTeacherById(teacherId);
-//
-//        if(teacher == null){
-//            System.out.println("Teacher with id: " + teacherId + " not found!");
-//            return;
-//        }
-//
-//        System.out.println("Which course should they be enrolled to? Enter Course Id: ");
-//        String courseId = scanner.nextLine();
-//        Course course = findCourseById(courseId);
-//
-//        if(course == null){
-//            System.out.println("Course with Id: " +courseId + " not found!");
-//            return;
-//        }
-//        System.out.println("Teacher: " + teacher.getName() + " has been enrolled into " +course.getName() + ".");
-//    }
+    public static void assignTeacher() {
+        System.out.println("Enter a Teacher Id to assign: ");
+        String teacherId = scanner.nextLine();
+        Teacher teacher = findTeacherById(teacherId);
+
+        if(teacher == null){
+            System.out.println("Teacher with id: " + teacherId + " not found!");
+            return;
+        }
+
+        System.out.println("Which course should they be enrolled to? Enter Course Id: ");
+        String courseId = scanner.nextLine();
+        Course course = findCourseById(courseId);
+
+        if(course == null){
+            System.out.println("Course with Id: " +courseId + " not found!");
+            return;
+        }
+        System.out.println("Teacher: " + teacher.getName() + " has been enrolled into " +course.getName() + ".");
+    }
 
     public static void showCourses(){
         System.out.println("Courses: ");
