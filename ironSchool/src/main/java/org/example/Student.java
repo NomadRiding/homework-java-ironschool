@@ -1,4 +1,5 @@
 package org.example;
+import java.util.List;
 import java.util.UUID;
 
 public class Student {
@@ -7,7 +8,8 @@ public class Student {
     private String name;
     private String address;
     private String email;
-   // private Course course;
+    private Course course;
+    private List<Course> coursesEnrolled;
 
 
 
@@ -56,14 +58,30 @@ public class Student {
         this.email = email;
     }
 
-    // Getter and Setter for course
-    //public Course getCourse() {
-      //  return course;
-//    }
-//
-//    public void setCourse(Course course) {
-//        this.course = course;
-//    }
+     //Getter and Setter for course
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder details = new StringBuilder();
+        details.append("Student Name: ").append(name).append("\n")
+                .append("Student ID: ").append(studentId).append("\n")
+                .append("Address: ").append(address).append("\n")
+                .append("Email: ").append(email).append("\n");
+        details.append("Enrolled Courses: ").append(coursesEnrolled.size() > 0 ? "\n" : "None\n");
+
+        for (Course course : coursesEnrolled) {
+            details.append(course.getName()).append("\n");
+        }
+        return details.toString();
+    }
 
 
 }

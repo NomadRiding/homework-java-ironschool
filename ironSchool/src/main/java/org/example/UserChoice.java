@@ -12,6 +12,7 @@ public class UserChoice {
     public static double totalStudentEnrollment = 0.0;
     private static List<Course> courses = new ArrayList<>();
     private static List<Teacher> teachers = new ArrayList<>();
+    private static List<Student> students = new ArrayList<>();
 
     public static void main(String[] args) {
         welcome();
@@ -147,10 +148,10 @@ public class UserChoice {
                         // Lookup course logic here
                         break;
                     case 5:
-                        // Show students logic here
+                        showStudentNames();
                         break;
                     case 6:
-                        // Lookup student logic here
+                        lookupStudent();
                         break;
                     case 7:
                         showTeacherNames();
@@ -186,6 +187,41 @@ public class UserChoice {
         for(Teacher teacher : teachers){
             System.out.println(teacher.getName());
         }
+    }
+
+    public static void showStudentNames(){
+        System.out.println("Students: ");
+        for(Student student : students){
+            System.out.println(student.getName());
+        }
+    }
+
+    public static void lookupStudent() {
+        System.out.println("Enter the student ID to lookup:");
+        try {
+            String studentId = scanner.nextLine();
+            scanner.nextLine();  // Clear the buffer
+
+            Student student = findStudentById(studentId);
+
+            if (student != null) {
+                System.out.println(student); // Print full details using Student's toString() method
+            } else {
+                System.out.println("Student with ID " + studentId + " not found.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid student ID.");
+            scanner.next();  // Clear invalid input
+        }
+    }
+
+    private static Student findStudentById(String studentId) {
+        for (Student student : students) {
+            if (student.getStudentId().equals(studentId)) {
+                return student;
+            }
+        }
+        return null;  // Return null if student not found
     }
 
 
