@@ -172,11 +172,11 @@ public class UserChoice {
 
             try {
                 int choice = scanner.nextInt();
-                scanner.nextLine();  // Clear the buffer
+                scanner.nextLine();
 
                 switch (choice) {
                     case 1:
-                        // Enroll logic here
+                        enrollStudent();
                         break;
                     case 2:
                         // Assign logic here
@@ -213,6 +213,27 @@ public class UserChoice {
                 scanner.next(); // Clear invalid input
             }
         }
+    }
+
+    public static void enrollStudent() {
+        System.out.println("Enter a student Id to enroll: ");
+        String studentId = scanner.nextLine();
+        Student student = findStudentById(studentId);
+
+        if(student == null){
+            System.out.println("Student with id: " + studentId + " not found!");
+            return;
+        }
+
+        System.out.println("Which course should they be enrolled to? Enter Course Id: ");
+        String courseId = scanner.nextLine();
+        Course course = findCourseById(courseId);
+
+        if(course == null){
+            System.out.println("Course with Id: " +courseId + " not found!");
+            return;
+        }
+        System.out.println("Student: " + student.getName() + " has been enrolled into " +course.getName() + ".");
     }
 
     public static void showCourses(){
