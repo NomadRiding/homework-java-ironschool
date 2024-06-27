@@ -10,9 +10,9 @@ public class UserChoice {
     public static double totalTeacherSalary = 0.0;
     public static double totalProfit = 0.0;
     public static double totalStudentEnrollment = 0.0;
-    private static List<Course> courses = new ArrayList<>();
-    private static List<Teacher> teachers = new ArrayList<>();
-    private static List<Student> students = new ArrayList<>();
+    public static List<Course> courses = new ArrayList<>();
+    public static List<Teacher> teachers = new ArrayList<>();
+    public static List<Student> students = new ArrayList<>();
 
     public static void main(String[] args) {
         welcome();
@@ -172,14 +172,14 @@ public class UserChoice {
 
             try {
                 int choice = scanner.nextInt();
-                scanner.nextLine();  // Clear the buffer
+                scanner.nextLine();
 
                 switch (choice) {
                     case 1:
-                        // Enroll logic here
+                        enrollStudent();
                         break;
                     case 2:
-                        // Assign logic here
+//                        assignTeacher();
                         break;
                     case 3:
                         showCourses();
@@ -210,10 +210,52 @@ public class UserChoice {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Uh oh, please enter a valid number.");
-                scanner.next(); // Clear invalid input
+                scanner.next();
             }
         }
     }
+
+    public static void enrollStudent() {
+        System.out.println("Enter a student Id to enroll: ");
+        String studentId = scanner.nextLine();
+        Student student = findStudentById(studentId);
+
+        if(student == null){
+            System.out.println("Student with id: " + studentId + " not found!");
+            return;
+        }
+
+        System.out.println("Which course should they be enrolled to? Enter Course Id: ");
+        String courseId = scanner.nextLine();
+        Course course = findCourseById(courseId);
+
+        if(course == null){
+            System.out.println("Course with Id: " +courseId + " not found!");
+            return;
+        }
+        System.out.println("Student: " + student.getName() + " has been enrolled into " +course.getName() + ".");
+    }
+
+//    public static void assignTeacher() {
+//        System.out.println("Enter a Teacher Id to assign: ");
+//        String teacherId = scanner.nextLine();
+//        Teacher teacher = findTeacherById(teacherId);
+//
+//        if(teacher == null){
+//            System.out.println("Teacher with id: " + teacherId + " not found!");
+//            return;
+//        }
+//
+//        System.out.println("Which course should they be enrolled to? Enter Course Id: ");
+//        String courseId = scanner.nextLine();
+//        Course course = findCourseById(courseId);
+//
+//        if(course == null){
+//            System.out.println("Course with Id: " +courseId + " not found!");
+//            return;
+//        }
+//        System.out.println("Teacher: " + teacher.getName() + " has been enrolled into " +course.getName() + ".");
+//    }
 
     public static void showCourses(){
         System.out.println("Courses: ");
@@ -240,28 +282,28 @@ public class UserChoice {
         System.out.println("Enter the student ID to lookup:");
         try {
             String studentId = scanner.nextLine();
-            scanner.nextLine();  // Clear the buffer
+            scanner.nextLine();
 
             Student student = findStudentById(studentId);
 
             if (student != null) {
-                System.out.println(student); // Print full details using Student's toString() method
+                System.out.println(student);
             } else {
                 System.out.println("Student with ID " + studentId + " not found.");
             }
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter a valid student ID.");
-            scanner.next();  // Clear invalid input
+            scanner.next();
         }
     }
 
-    private static Student findStudentById(String studentId) {
+    public static Student findStudentById(String studentId) {
         for (Student student : students) {
             if (student.getStudentId().equals(studentId)) {
                 return student;
             }
         }
-        return null;  // Return null if student not found
+        return null;
     }
 
     public static void lookupCourse() {
@@ -283,7 +325,7 @@ public class UserChoice {
         }
     }
 
-    private static Course findCourseById(String courseId) {
+    public static Course findCourseById(String courseId) {
         for (Course course : courses) {
             if (course.getCourseId().equals(courseId)) {
                 return course;
@@ -315,4 +357,5 @@ public class UserChoice {
         Matcher matcher = pattern.matcher(input);
         return matcher.find();
     }
+
 }
