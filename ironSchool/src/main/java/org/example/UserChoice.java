@@ -111,7 +111,47 @@ public class UserChoice {
             System.out.println(course.getName() + " : $" + course.getPrice());
         }
         System.out.println("Total course cost: $" + totalCourseCost);
+        studentQuantity();
+    }
+
+    public static void studentQuantity(){
+        System.out.println("How many students will attend this school?");
+        int studentQuantity;
+        while(true){
+            try{
+                studentQuantity = scanner.nextInt();
+                scanner.nextLine();
+                if(studentQuantity > 0){
+                    break;
+                }
+                System.out.println("Enter a number above ZERO");
+            } catch (InputMismatchException e){
+                System.out.println("Uh oh! please enter a number. ");
+                scanner.next();
+            }
+        }
+        collectStudentNames(studentQuantity);
         commandMenu();
+    }
+
+
+    private static void collectStudentNames(int studentQuantity) {
+        for (int i = 0; i < studentQuantity; i++) {
+            String name = getFilteredName("student", i);
+            System.out.println("Enter the address for student " + name + ": ");
+            String address = scanner.nextLine();
+            System.out.println("Enter the email for student " + name + ": ");
+            String email = scanner.nextLine();
+
+            Student student = new Student(name, address, email);
+            students.add(student);
+            totalStudentEnrollment += 3000;
+        }
+
+        System.out.println("Student names:");
+        for (Student student : students) {
+            System.out.println(student.getName());
+        }
     }
 
     public static void commandMenu() {
@@ -145,7 +185,7 @@ public class UserChoice {
                         showCourses();
                         break;
                     case 4:
-                        // Lookup course logic here
+                        lookupCourse();
                         break;
                     case 5:
                         showStudentNames();
@@ -222,6 +262,34 @@ public class UserChoice {
             }
         }
         return null;  // Return null if student not found
+    }
+
+    public static void lookupCourse() {
+        System.out.println("Enter the course ID to lookup:");
+        try {
+            String courseId = scanner.nextLine();
+            scanner.nextLine();
+
+            Course course = findCourseById(courseId);
+
+            if (course != null) {
+                System.out.println(course);
+            } else {
+                System.out.println("Course with ID " + courseId + " not found.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid course ID.");
+            scanner.next();
+        }
+    }
+
+    private static Course findCourseById(String courseId) {
+        for (Course course : courses) {
+            if (course.getCourseId().equals(courseId)) {
+                return course;
+            }
+        }
+        return null;
     }
 
 

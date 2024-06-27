@@ -8,6 +8,14 @@ public class Course {
     private double money_earned;
     private Teacher teacher;
 
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
     public Course(String name, double price) {
         this.courseId = generateCourseId();
         this.name = name;
@@ -52,5 +60,14 @@ public class Course {
         if (earnings > 0){
             this.money_earned += earnings;
         }
+    }
+
+    @Override
+    public String toString() {
+
+        return "Course Name: " + name + "\n" +
+                "Course ID: " + courseId + "\n" +
+                "price: " + price + "\n" +
+                "money_earned: " + money_earned + "\n";
     }
 }
