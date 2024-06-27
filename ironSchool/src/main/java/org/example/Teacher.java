@@ -1,10 +1,12 @@
 package org.example;
+import java.util.List;
 import java.util.UUID;
 
     public class Teacher {
         private String teacherId;
         private String name;
         private double salary;
+        private List<Course> coursesEnrolled;
 
         public Teacher(String name, double salary) {
             this.teacherId = generateId();
@@ -34,6 +36,20 @@ import java.util.UUID;
 
         public void setSalary(double salary) {
             this.salary = salary;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder details = new StringBuilder();
+            details.append("teacher Name: ").append(name).append("\n")
+                    .append("teacher ID: ").append(teacherId).append("\n")
+                    .append("Salary: ").append(salary).append("\n");
+            details.append("Enrolled Courses: ").append(coursesEnrolled.size() > 0 ? "\n" : "None\n");
+
+            for (Course course : coursesEnrolled) {
+                details.append(course.getName()).append("\n");
+            }
+            return details.toString();
         }
     }
 

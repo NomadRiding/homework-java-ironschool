@@ -197,7 +197,7 @@ public class UserChoice {
                         showTeacherNames();
                         break;
                     case 8:
-                        // Lookup teacher logic here
+                        lookupTeacher();
                         break;
                     case 9:
                         showProfit();
@@ -270,92 +270,119 @@ public class UserChoice {
             System.out.println(teacher.getName());
         }
     }
-
-    public static void showStudentNames(){
-        System.out.println("Students: ");
-        for(Student student : students){
-            System.out.println(student.getName());
-        }
-    }
-
-    public static void lookupStudent() {
-        System.out.println("Enter the student ID to lookup:");
+    public static void lookupTeacher() {
+        System.out.println("Enter the teacher ID to lookup:");
         try {
-            String studentId = scanner.nextLine();
+            String teacherId = scanner.nextLine();
             scanner.nextLine();
 
-            Student student = findStudentById(studentId);
+            Teacher teacher = findTeacherById(teacherId);
 
-            if (student != null) {
-                System.out.println(student);
+            if (teacher != null) {
+                System.out.println(teacher);
             } else {
-                System.out.println("Student with ID " + studentId + " not found.");
+                System.out.println("Teacher with ID " + teacherId + " not found.");
             }
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a valid student ID.");
+            System.out.println("Invalid input. Please enter a valid teacher ID.");
             scanner.next();
         }
     }
 
-    public static Student findStudentById(String studentId) {
-        for (Student student : students) {
-            if (student.getStudentId().equals(studentId)) {
-                return student;
+        public static void showStudentNames () {
+            System.out.println("Students: ");
+            for (Student student : students) {
+                System.out.println(student.getName());
             }
         }
-        return null;
-    }
 
-    public static void lookupCourse() {
-        System.out.println("Enter the course ID to lookup:");
-        try {
-            String courseId = scanner.nextLine();
-            scanner.nextLine();
+        public static void lookupStudent () {
+            System.out.println("Enter the student ID to lookup:");
+            try {
+                String studentId = scanner.nextLine();
+                scanner.nextLine();
 
-            Course course = findCourseById(courseId);
+                Student student = findStudentById(studentId);
 
-            if (course != null) {
-                System.out.println(course);
-            } else {
-                System.out.println("Course with ID " + courseId + " not found.");
+                if (student != null) {
+                    System.out.println(student);
+                } else {
+                    System.out.println("Student with ID " + studentId + " not found.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid student ID.");
+                scanner.next();
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a valid course ID.");
-            scanner.next();
+
+        }
+        public static Teacher findTeacherById (String teacherId){
+            for (Teacher teacher : teachers) {
+                if (teacher.getTeacherId().equals(teacherId)) {
+                    return teacher;
+                }
+            }
+            return null;
+        }
+
+        public static Student findStudentById (String studentId){
+            for (Student student : students) {
+                if (student.getStudentId().equals(studentId)) {
+                    return student;
+                }
+            }
+            return null;
+        }
+
+        public static void lookupCourse () {
+            System.out.println("Enter the course ID to lookup:");
+            try {
+                String courseId = scanner.nextLine();
+                scanner.nextLine();
+
+                Course course = findCourseById(courseId);
+
+                if (course != null) {
+                    System.out.println(course);
+                } else {
+                    System.out.println("Course with ID " + courseId + " not found.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid course ID.");
+                scanner.next();
+            }
+        }
+
+        public static Course findCourseById (String courseId){
+            for (Course course : courses) {
+                if (course.getCourseId().equals(courseId)) {
+                    return course;
+                }
+            }
+            return null;
+        }
+
+
+        public static void showProfit () {
+            totalProfit = totalStudentEnrollment - (totalCourseCost - totalTeacherSalary);
+            System.out.println(totalProfit);
+        }
+
+
+        public static Boolean containsProfanity (String input){
+            List<String> profanities = Arrays.asList("fuck", "bitch", "asshole", "cunt");
+            for (String profanity : profanities) {
+                if (input.toLowerCase().contains(profanity)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static Boolean containsNumbers (String input){
+            Pattern pattern = Pattern.compile("\\d");
+            Matcher matcher = pattern.matcher(input);
+            return matcher.find();
         }
     }
 
-    public static Course findCourseById(String courseId) {
-        for (Course course : courses) {
-            if (course.getCourseId().equals(courseId)) {
-                return course;
-            }
-        }
-        return null;
-    }
 
-
-
-    public static void showProfit(){
-        totalProfit = totalStudentEnrollment - (totalCourseCost - totalTeacherSalary);
-        System.out.println(totalProfit);
-    }
-
-
-    public static Boolean containsProfanity(String input){
-        List<String> profanities = Arrays.asList("fuck", "bitch", "asshole", "cunt");
-        for (String profanity : profanities) {
-            if (input.toLowerCase().contains(profanity)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static Boolean containsNumbers(String input){
-        Pattern pattern = Pattern.compile("\\d");
-        Matcher matcher = pattern.matcher(input);
-        return matcher.find();
-    }
-
-}
